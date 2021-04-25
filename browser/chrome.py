@@ -40,3 +40,9 @@ class Chrome:
         # ChromeのWebDriverオブジェクトを作成する。
         return webdriver.Chrome(
             ChromeDriverManager().install(), options=options)
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.quit()
