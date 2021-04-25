@@ -3,6 +3,8 @@ import time
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
+from . import element
+
 
 class Chrome:
     def __init__(self, is_headless=True):
@@ -14,10 +16,29 @@ class Chrome:
             self._driver = self._set_driver()
         self._driver.get(url)
         time.sleep(1)
+        
+    def find_element_by_css_selector(self, selector):
+        if self._is_open():
+            return element.Element(
+                self._driver.find_element_by_css_selector(selector),
+                self._driver)
+
+    def execute_script(self, script, element):
+        if self._is_open():
+            self._driver.execute_script(script, element)
 
     def quit(self):
-        if self._driver is not None:
+        if self._is_open():
             self._driver.quit()
+
+    @property
+    def current_url(self):
+        if self._is_open():
+            return self._driver.current_url
+        return None
+
+    def _is_open(self):
+        return self._driver is not None
 
     def _set_driver(self):
         # Chromeドライバーの読み込み

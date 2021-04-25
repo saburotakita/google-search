@@ -1,9 +1,12 @@
-from browser import chrome
+import time
 
+
+from browser.chrome import Chrome
+from google.search import GoogleSearch
 
 def main():
-    with chrome.Chrome(False) as conn:
-        conn.get('https://www.yahoo.co.jp/')
+    with GoogleSearch(Chrome(False)) as conn:
+        conn.first_search('千葉県')
 
 
 if __name__ == '__main__':
