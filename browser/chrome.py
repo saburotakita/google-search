@@ -17,11 +17,21 @@ class Chrome:
         self._driver.get(url)
         time.sleep(1)
         
+    def find_elements_by_id(self, id_name):
+        if self._is_open():
+            return [element.Element(elm, self._driver) 
+                    for elm in self._driver.find_elements_by_id(id_name)]
+        
     def find_element_by_css_selector(self, selector):
         if self._is_open():
             return element.Element(
                 self._driver.find_element_by_css_selector(selector),
                 self._driver)
+            
+    def find_elements_by_class_name(self, class_name):
+        if self._is_open():
+            return [element.Element(elm, self._driver) 
+                    for elm in self._driver.find_elements_by_class_name(class_name)]
 
     def execute_script(self, script, element):
         if self._is_open():
