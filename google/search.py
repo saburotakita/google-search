@@ -44,7 +44,7 @@ class GoogleSearch:
     def next_page(self):
         next_elements = self._browser.find_elements_by_id('pnnext')
         if len(next_elements):
-            next_elements[0].click()
+            self._browser.get(next_elements[0].href)
             time.sleep(1)
             return True
         return False
