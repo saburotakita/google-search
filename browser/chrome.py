@@ -7,6 +7,10 @@ from . import element
 
 
 class Chrome:
+    """
+    Chromeの自動操作
+    seleniumのdriverを操作
+    """
     def __init__(self, is_headless=True):
         self._is_headless = is_headless
         self._driver = None
