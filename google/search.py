@@ -58,8 +58,10 @@ class GoogleSearch:
             count = len(results) + len(ex_results)
             if max_count >= count:
                 ex_results += results
+                print(f'{len(ex_results)}件取得完了')
             else:
                 ex_results += results[:max_count-len(ex_results)]
+                print(f'{len(ex_results)}件取得完了')
                 break
 
             if not self.next_page():

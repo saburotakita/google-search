@@ -31,6 +31,8 @@ def search(text, count):
 
     count = int(count)
     with GoogleSearch(Chrome(True)) as conn:
+        print('='*20)
+        print('取得開始')
         now = datetime.datetime.now()
         results = conn.search(text, count)
 
@@ -42,6 +44,10 @@ def search(text, count):
 
     file_path = dir_path / f'result_{now.strftime("%Y%m%d_%H%M%S")}.csv'
     df.to_csv(file_path, encoding='utf-8_sig')
+
+    print('='*20)
+    print('取得完了')
+    print(str(file_path))
 
     eel.change_message('success', '完了しました')
     eel.change_search_button('enable')
